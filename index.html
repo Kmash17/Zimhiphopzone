@@ -1,211 +1,603 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>ZimHipHopZone | Zimbabwe Hip Hop News, Videos & Culture</title>
-    <meta name="description" content="ZimHipHopZone – Your #1 source for Zimbabwean hip-hop news, music videos, artist interviews, and urban culture. Stay updated with the hottest Zim rap.">
+    <meta name="description" content="ZimHipHopZone – Your #1 source for Zimbabwean hip-hop news, music videos, artist interviews, and urban culture.">
     <meta name="keywords" content="Zimbabwe hip hop, Zim rap, ZimHipHopZone, Zimbabwean music, urban culture Zimbabwe">
     <meta name="author" content="ZimHipHopZone">
+    <meta name="theme-color" content="#0a0a0a">
     
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
     
     <style>
-        /* ==================== RESET & VARIABLES ==================== */
+        /* ==================== CSS VARIABLES & RESET ==================== */
+        :root {
+            --primary: #ff003c;
+            --primary-glow: rgba(255, 0, 60, 0.4);
+            --secondary: #00f0ff;
+            --accent: #ff9f1c;
+            --dark: #050505;
+            --dark-elevated: #0f0f0f;
+            --dark-card: #141414;
+            --dark-border: rgba(255,255,255,0.06);
+            --light: #f8f9fa;
+            --light-elevated: #ffffff;
+            --light-card: #f1f3f5;
+            --light-border: rgba(0,0,0,0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #6c757d;
+            --gradient-hero: linear-gradient(135deg, #ff003c 0%, #ff6b6b 50%, #ff9f1c 100%);
+            --gradient-mesh: radial-gradient(at 40% 20%, rgba(255,0,60,0.15) 0px, transparent 50%),
+                              radial-gradient(at 80% 0%, rgba(0,240,255,0.1) 0px, transparent 50%),
+                              radial-gradient(at 0% 50%, rgba(255,159,28,0.1) 0px, transparent 50%);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+            --shadow-md: 0 8px 32px rgba(0,0,0,0.3);
+            --shadow-glow: 0 0 40px rgba(255,0,60,0.15);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        [data-theme="light"] {
+            --dark: #f8f9fa;
+            --dark-elevated: #ffffff;
+            --dark-card: #f1f3f5;
+            --dark-border: rgba(0,0,0,0.08);
+            --text-primary: #0a0a0a;
+            --text-secondary: #495057;
+            --text-muted: #868e96;
+            --gradient-mesh: radial-gradient(at 40% 20%, rgba(255,0,60,0.08) 0px, transparent 50%),
+                              radial-gradient(at 80% 0%, rgba(0,240,255,0.05) 0px, transparent 50%);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #e63946;
-            --primary-dark: #c1121f;
-            --secondary: #1d3557;
-            --dark: #0a0a0a;
-            --dark-gray: #1a1a1a;
-            --light-gray: #f4f4f4;
-            --white: #ffffff;
-            --text-muted: #6c757d;
-            --gradient: linear-gradient(135deg, var(--primary) 0%, #ff6b6b 100%);
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
-            --shadow-dark: 0 10px 30px rgba(0,0,0,0.3);
-            --transition: all 0.3s ease;
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-body);
             line-height: 1.6;
-            color: var(--dark);
-            background: var(--white);
-            scroll-behavior: smooth;
+            color: var(--text-primary);
+            background: var(--dark);
+            overflow-x: hidden;
+            transition: background 0.5s ease, color 0.5s ease;
         }
 
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
+        ::selection {
+            background: var(--primary);
+            color: white;
         }
 
-        .highlight {
-            color: var(--primary);
+        /* ==================== SCROLL PROGRESS ==================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+            z-index: 9999;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* ==================== SKIP LINK ==================== */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 0 0 12px 12px;
+            font-weight: 600;
+            z-index: 10001;
+            text-decoration: none;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* ==================== BREAKING NEWS TICKER ==================== */
+        .ticker-wrap {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            z-index: 9998;
+            overflow: hidden;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .ticker-label {
+            background: rgba(0,0,0,0.2);
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            z-index: 2;
+        }
+
+        .ticker-content {
+            display: flex;
+            animation: ticker 30s linear infinite;
+            white-space: nowrap;
+            padding-left: 20px;
+        }
+
+        .ticker-wrap:hover .ticker-content {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            padding: 0 40px;
             position: relative;
+        }
+
+        .ticker-item::after {
+            content: '•';
+            position: absolute;
+            right: 0;
+            opacity: 0.5;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* ==================== HEADER ==================== */
         .site-header {
             position: fixed;
-            top: 0;
+            top: 36px;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--dark-border);
             z-index: 1000;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+
+        [data-theme="light"] .site-header {
+            background: rgba(248, 249, 250, 0.85);
+        }
+
+        .site-header.scrolled {
+            background: rgba(5, 5, 5, 0.95);
+            box-shadow: var(--shadow-md);
+        }
+
+        [data-theme="light"] .site-header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .site-header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 72px;
         }
 
         .logo a {
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 400;
             text-decoration: none;
-            color: var(--white);
-            letter-spacing: -1px;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .logo span {
             color: var(--primary);
+            position: relative;
+        }
+
+        .logo span::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-hero);
+            border-radius: 2px;
         }
 
         .main-nav ul {
             display: flex;
-            gap: 32px;
+            gap: 36px;
             list-style: none;
+            align-items: center;
         }
 
         .main-nav a {
-            color: var(--white);
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover,
+        .main-nav a:focus {
+            color: var(--text-primary);
+        }
+
+        .main-nav a:hover::after,
+        .main-nav a:focus::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle,
+        .search-trigger,
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: var(--transition);
         }
 
-        .main-nav a:hover {
+        .theme-toggle:hover,
+        .search-trigger:hover {
+            background: var(--dark-card);
             color: var(--primary);
-        }
-
-        .search-icon {
-            color: var(--white);
-            cursor: pointer;
-            font-size: 1.2rem;
+            transform: rotate(15deg);
         }
 
         .mobile-menu-btn {
             display: none;
+        }
+
+        /* ==================== SEARCH OVERLAY ==================== */
+        .search-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 5, 5, 0.98);
+            z-index: 2000;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 15vh;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .search-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-container {
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .search-input-wrap {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .search-input-wrap i {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .search-overlay input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--dark-border);
+            padding: 20px 20px 20px 50px;
+            font-size: 2rem;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-overlay input:focus {
+            border-bottom-color: var(--primary);
+        }
+
+        .search-overlay input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
             background: none;
             border: none;
-            color: var(--white);
-            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 2rem;
             cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .search-close:hover {
+            background: var(--dark-card);
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .search-suggestions h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .search-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .search-tag {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .search-tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
         }
 
         /* ==================== HERO SECTION ==================== */
         .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%), url('https://picsum.photos/id/104/1920/1080');
-            background-blend-mode: overlay;
-            background-size: cover;
-            background-position: center;
             display: flex;
             align-items: center;
             position: relative;
-            margin-top: 0;
+            margin-top: 108px;
+            overflow: hidden;
+            background: var(--dark);
         }
 
-        .hero-overlay {
+        .hero-mesh {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+            inset: 0;
+            background: var(--gradient-mesh);
+            pointer-events: none;
+        }
+
+        .hero-particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+            33% { transform: translateY(-100px) translateX(50px); opacity: 0.6; }
+            66% { transform: translateY(50px) translateX(-30px); opacity: 0.2; }
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
-            color: var(--white);
-            max-width: 800px;
+            color: var(--text-primary);
         }
 
         .hero-badge {
-            display: inline-block;
-            background: var(--primary);
-            padding: 6px 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 0, 60, 0.1);
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            padding: 8px 20px;
             border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 32px;
+            color: var(--primary);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 0, 60, 0.2); }
+            50% { box-shadow: 0 0 20px 5px rgba(255, 0, 60, 0.1); }
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.2;
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 400;
+            line-height: 0.95;
             margin-bottom: 24px;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 .gradient-text {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 32px;
-            max-width: 600px;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 540px;
+            line-height: 1.7;
         }
 
         .hero-buttons {
             display: flex;
             gap: 16px;
             margin-bottom: 48px;
+            flex-wrap: wrap;
         }
 
-        .btn-primary, .btn-secondary {
-            padding: 14px 32px;
+        .btn {
+            padding: 16px 36px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             border-radius: 50px;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary {
             background: var(--primary);
-            color: var(--white);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 0, 60, 0.3);
         }
 
         .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 0, 60, 0.5);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
         }
 
         .btn-secondary:hover {
-            background: var(--white);
-            color: var(--dark);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .btn-ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
         }
 
         .hero-stats {
@@ -219,74 +611,179 @@
         }
 
         .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
             color: var(--primary);
+            line-height: 1;
         }
 
         .stat-label {
-            font-size: 0.85rem;
-            opacity: 0.7;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 6px;
         }
 
-        /* ==================== SECTION HEADERS ==================== */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 4/5;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .hero-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5,5,5,0.8) 0%, transparent 50%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-md);
+            animation: float-card 6s ease-in-out infinite;
+            z-index: 3;
+        }
+
+        .floating-card-1 {
+            top: 10%;
+            right: -20px;
+            animation-delay: 0s;
+        }
+
+        .floating-card-2 {
+            bottom: 15%;
+            left: -30px;
+            animation-delay: 3s;
+        }
+
+        @keyframes float-card {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .floating-card h4 {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .floating-card p {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .floating-card .trend {
+            color: var(--primary);
+            font-size: 0.85rem;
+        }
+
+        /* ==================== SECTION UTILITIES ==================== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
         .section-header {
             text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-header.dark {
-            color: var(--white);
+            margin-bottom: 64px;
         }
 
         .section-tag {
-            display: inline-block;
-            background: rgba(230, 57, 70, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 0, 60, 0.1);
             color: var(--primary);
-            padding: 4px 16px;
+            padding: 6px 20px;
             border-radius: 50px;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
             margin-bottom: 16px;
+            letter-spacing: 2px;
         }
 
         .section-header p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+            font-size: 1.1rem;
         }
 
         /* ==================== FEATURED NEWS ==================== */
         .featured-news {
-            padding: 80px 0;
-            background: var(--white);
+            padding: 120px 0;
+            background: var(--dark-elevated);
+            position: relative;
         }
 
         .featured-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr;
+            grid-template-columns: 1.4fr 1fr;
             gap: 40px;
         }
 
         .featured-card {
-            background: var(--white);
-            border-radius: 16px;
+            background: var(--dark-card);
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
             transition: var(--transition);
+            position: relative;
         }
 
         .featured-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+            border-color: rgba(255, 0, 60, 0.2);
+        }
+
+        .featured-card.main-feature {
+            grid-row: span 2;
         }
 
         .card-image {
@@ -296,56 +793,69 @@
 
         .card-image img {
             width: 100%;
-            height: 300px;
+            height: 100%;
             object-fit: cover;
-            transition: var(--transition);
+            transition: transform 0.7s ease;
         }
 
         .featured-card:hover .card-image img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .card-category {
             position: absolute;
-            top: 16px;
-            left: 16px;
+            top: 20px;
+            left: 20px;
             background: var(--primary);
-            color: var(--white);
-            padding: 4px 12px;
-            border-radius: 4px;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
         }
 
         .card-content {
-            padding: 24px;
+            padding: 32px;
         }
 
         .card-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
             line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .card-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
         .card-meta {
             display: flex;
-            gap: 16px;
-            margin-top: 16px;
+            gap: 20px;
             font-size: 0.85rem;
             color: var(--text-muted);
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .read-more {
             color: var(--primary);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.3s;
             margin-left: auto;
-            transition: var(--transition);
         }
 
         .read-more:hover {
-            gap: 4px;
+            gap: 12px;
         }
 
         .news-sidebar {
@@ -356,375 +866,602 @@
 
         .news-item {
             display: flex;
-            gap: 16px;
-            padding: 16px;
-            background: var(--light-gray);
-            border-radius: 12px;
+            gap: 20px;
+            padding: 24px;
+            background: var(--dark-card);
+            border-radius: 16px;
+            border: 1px solid var(--dark-border);
             transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
         }
 
         .news-item:hover {
-            background: #e8e8e8;
-            transform: translateX(5px);
+            background: var(--dark-elevated);
+            transform: translateX(8px);
+            border-color: rgba(255, 0, 60, 0.2);
         }
 
         .news-number {
-            font-size: 2rem;
-            font-weight: 800;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
             color: var(--primary);
-            opacity: 0.5;
+            opacity: 0.3;
+            line-height: 1;
+            min-width: 40px;
         }
 
         .news-details h4 {
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .news-details a {
-            text-decoration: none;
-            color: var(--dark);
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-primary);
         }
 
         .news-date {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         /* ==================== VIDEO GALLERY ==================== */
         .video-gallery {
-            padding: 80px 0;
+            padding: 120px 0;
             background: var(--dark);
-            color: var(--white);
+            position: relative;
         }
 
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .video-card {
-            background: var(--dark-gray);
-            border-radius: 12px;
+            background: var(--dark-card);
+            border-radius: 20px;
             overflow: hidden;
+            border: 1px solid var(--dark-border);
             transition: var(--transition);
+            position: relative;
         }
 
         .video-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .video-card.featured {
+            grid-column: span 2;
+            grid-row: span 2;
         }
 
         .video-thumbnail {
             position: relative;
             cursor: pointer;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .video-card.featured .video-thumbnail {
+            aspect-ratio: 16/10;
         }
 
         .video-thumbnail img {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.1);
         }
 
         .play-btn {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 70px;
+            height: 70px;
             background: var(--primary);
             border: none;
             border-radius: 50%;
-            color: var(--white);
+            color: white;
             font-size: 1.5rem;
             cursor: pointer;
             transition: var(--transition);
             opacity: 0.9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.4);
         }
 
         .play-btn:hover {
             transform: translate(-50%, -50%) scale(1.1);
             opacity: 1;
+            box-shadow: 0 0 50px rgba(255, 0, 60, 0.6);
         }
 
         .video-duration {
             position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(0,0,0,0.7);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            bottom: 16px;
+            right: 16px;
+            background: rgba(0,0,0,0.8);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            backdrop-filter: blur(4px);
         }
 
         .video-info {
-            padding: 16px;
+            padding: 24px;
         }
 
         .video-info h4 {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .video-info p {
-            font-size: 0.85rem;
-            color: #aaa;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        /* Modal */
+        /* Video Modal */
         .video-modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
+            inset: 0;
+            background: rgba(5,5,5,0.95);
+            z-index: 3000;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .video-modal.active {
+            display: flex;
         }
 
         .video-modal-content {
             position: relative;
             width: 90%;
-            max-width: 900px;
+            max-width: 1000px;
+            animation: modalIn 0.4s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .close-modal {
             position: absolute;
-            top: -40px;
+            top: -60px;
             right: 0;
-            color: var(--white);
-            font-size: 2rem;
+            color: white;
+            font-size: 2.5rem;
             cursor: pointer;
+            background: none;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.1);
+            transform: rotate(90deg);
         }
 
         /* ==================== PLAYLIST SECTION ==================== */
         .playlist-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: var(--white);
+            padding: 120px 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .playlist-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,0,60,0.05) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         .playlist-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .spotify-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: #1DB954;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .playlist-info h2 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+        }
+
+        .playlist-info p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 32px;
         }
 
         .playlist-features {
             list-style: none;
-            margin: 25px 0;
+            margin: 32px 0;
         }
 
         .playlist-features li {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 14px;
+            color: var(--text-secondary);
+            font-size: 1rem;
         }
 
         .playlist-features i {
             color: #1DB954;
+            font-size: 1.2rem;
         }
 
         .btn-spotify {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: #1DB954;
-            color: var(--white);
-            padding: 12px 28px;
+            color: white;
+            padding: 16px 36px;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(29, 185, 84, 0.3);
         }
 
         .btn-spotify:hover {
             background: #1ed760;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(29, 185, 84, 0.4);
+        }
+
+        .playlist-embed {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-glow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .playlist-embed iframe {
+            display: block;
         }
 
         /* ==================== ARTISTS SECTION ==================== */
         .artists-section {
-            padding: 80px 0;
-            background: var(--light-gray);
+            padding: 120px 0;
+            background: var(--dark-elevated);
         }
 
         .artists-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 30px;
         }
 
         .artist-card {
-            background: var(--white);
-            border-radius: 16px;
+            background: var(--dark-card);
+            border-radius: 24px;
             overflow: hidden;
             text-align: center;
             transition: var(--transition);
-            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
         .artist-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-glow);
+            border-color: rgba(255, 0, 60, 0.2);
+        }
+
+        .artist-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
         }
 
         .artist-image img {
             width: 100%;
-            height: 250px;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .artist-card:hover .artist-image img {
+            transform: scale(1.1);
+        }
+
+        .artist-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,0,60,0.3) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .artist-card:hover .artist-glow {
+            opacity: 1;
         }
 
         .artist-info {
-            padding: 20px;
+            padding: 28px 20px;
         }
 
         .artist-info h4 {
             font-size: 1.3rem;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            font-weight: 700;
         }
 
         .artist-info p {
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
         }
 
         .artist-social {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 16px;
         }
 
         .artist-social a {
             color: var(--text-muted);
+            font-size: 1.1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-elevated);
             transition: var(--transition);
+            text-decoration: none;
         }
 
         .artist-social a:hover {
             color: var(--primary);
+            background: rgba(255, 0, 60, 0.1);
+            transform: translateY(-3px);
         }
 
         /* ==================== TRENDING ==================== */
         .trending {
-            padding: 40px 0;
-            background: var(--white);
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            padding: 60px 0;
+            background: var(--dark-card);
+            border-top: 1px solid var(--dark-border);
+            border-bottom: 1px solid var(--dark-border);
         }
 
-        .trending h3 {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+        .trending-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .trending-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trending-header i {
+            color: var(--accent);
         }
 
         .trending-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
 
         .trending-tags a {
-            background: var(--light-gray);
-            padding: 8px 20px;
+            background: var(--dark-elevated);
+            padding: 10px 24px;
             border-radius: 50px;
             text-decoration: none;
-            color: var(--dark);
-            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
             transition: var(--transition);
+            border: 1px solid var(--dark-border);
         }
 
         .trending-tags a:hover {
             background: var(--primary);
-            color: var(--white);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 0, 60, 0.3);
         }
 
         /* ==================== NEWSLETTER ==================== */
         .newsletter {
-            padding: 60px 0;
+            padding: 100px 0;
             background: var(--primary);
-            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .newsletter-content {
             text-align: center;
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .newsletter-content h2 {
-            font-size: 2rem;
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 400;
             margin-bottom: 16px;
+            color: white;
+            letter-spacing: 2px;
+        }
+
+        .newsletter-content > p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
         }
 
         .newsletter-form {
             display: flex;
             gap: 12px;
-            margin: 30px 0 15px;
+            margin: 40px 0 20px;
+            position: relative;
         }
 
         .newsletter-form input {
             flex: 1;
-            padding: 14px 20px;
+            padding: 18px 28px;
             border: none;
             border-radius: 50px;
             font-size: 1rem;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            backdrop-filter: blur(10px);
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .newsletter-form input:focus {
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.1);
         }
 
         .newsletter-form button {
             background: var(--dark);
-            color: var(--white);
+            color: white;
             border: none;
-            padding: 14px 28px;
+            padding: 18px 36px;
             border-radius: 50px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         .newsletter-form button:hover {
             background: #000;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .newsletter-form button.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .newsletter-form button.success {
+            background: #1DB954;
         }
 
         .newsletter-note {
-            font-size: 0.8rem;
-            opacity: 0.8;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
         }
 
         /* ==================== FOOTER ==================== */
         .site-footer {
             background: var(--dark);
-            color: #aaa;
-            padding: 60px 0 20px;
+            color: var(--text-muted);
+            padding: 80px 0 30px;
+            border-top: 1px solid var(--dark-border);
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 60px;
+            margin-bottom: 60px;
         }
 
         .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--white);
-            margin-bottom: 16px;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
         }
 
         .footer-logo span {
@@ -732,28 +1469,45 @@
         }
 
         .footer-about p {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            line-height: 1.8;
+            font-size: 0.95rem;
         }
 
         .social-links {
             display: flex;
-            gap: 15px;
+            gap: 12px;
         }
 
         .social-links a {
-            color: #aaa;
-            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
             transition: var(--transition);
+            text-decoration: none;
         }
 
         .social-links a:hover {
             color: var(--primary);
+            background: rgba(255, 0, 60, 0.1);
+            border-color: rgba(255, 0, 60, 0.3);
+            transform: translateY(-3px);
         }
 
         .footer-links h4 {
-            color: var(--white);
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .footer-links ul {
@@ -761,618 +1515,958 @@
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
 
         .footer-links a {
-            color: #aaa;
+            color: var(--text-muted);
             text-decoration: none;
             transition: var(--transition);
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .footer-links a:hover {
             color: var(--primary);
+            transform: translateX(4px);
         }
 
         .footer-contact p {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
         }
 
         .footer-contact i {
-            margin-right: 10px;
             color: var(--primary);
+            font-size: 1rem;
+            width: 20px;
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--dark-border);
             font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
-        /* ==================== BUTTONS & UTILITIES ==================== */
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 12px 28px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transition);
+        /* ==================== ANIMATIONS ==================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .btn-outline:hover {
-            background: var(--primary);
-            color: var(--white);
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .text-center {
-            text-align: center;
-        }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
 
         /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 968px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .featured-grid,
-            .playlist-wrapper,
-            .footer-grid {
+        @media (max-width: 1024px) {
+            .hero .container {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                text-align: center;
             }
-            
-            .main-nav {
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-visual {
                 display: none;
             }
-            
-            .mobile-menu-btn {
-                display: block;
+
+            .featured-grid {
+                grid-template-columns: 1fr;
             }
-            
-            .main-nav.active {
-                display: block;
+
+            .featured-card.main-feature {
+                grid-row: span 1;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .video-card.featured {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .playlist-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .artists-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background: var(--dark);
-                padding: 20px;
+                background: var(--dark-elevated);
+                border-bottom: 1px solid var(--dark-border);
+                padding: 24px;
+                backdrop-filter: blur(20px);
             }
-            
-            .main-nav.active ul {
+
+            .main-nav.active {
+                display: block;
+            }
+
+            .main-nav ul {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
+                align-items: flex-start;
             }
-            
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
             .hero-stats {
                 flex-wrap: wrap;
-                gap: 25px;
+                gap: 24px;
             }
-            
+
+            .news-item {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .artists-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
             .newsletter-form {
                 flex-direction: column;
             }
+
+            .ticker-item {
+                padding: 0 20px;
+            }
         }
 
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 2rem;
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
-            
-            .hero-buttons {
-                flex-direction: column;
+
+            .reveal {
+                opacity: 1;
+                transform: none;
             }
-            
-            .section-header h2 {
-                font-size: 1.8rem;
-            }
-            
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
+        }
+
+        /* ==================== UTILITIES ==================== */
+        .text-center { text-align: center; }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 16px 36px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
         }
     </style>
 </head>
 <body>
 
-<!-- ==================== HEADER / NAVIGATION ==================== -->
-<header class="site-header">
-    <div class="container">
-        <div class="logo">
-            <a href="#">Zim<span>HipHop</span>Zone</a>
-        </div>
-        
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
-            <i class="fas fa-bars"></i>
-        </button>
-        
-        <nav class="main-nav" id="mainNav">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#news">News</a></li>
-                <li><a href="#videos">Videos</a></li>
-                <li><a href="#playlists">Playlists</a></li>
-                <li><a href="#artists">Artists</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-        
-        <div class="search-icon">
-            <i class="fas fa-search"></i>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Breaking News Ticker -->
+    <div class="ticker-wrap" role="marquee" aria-label="Breaking news">
+        <div class="ticker-label"><i class="fas fa-bolt"></i> Breaking</div>
+        <div class="ticker-content" id="tickerContent">
+            <span class="ticker-item">Holy Ten Drops Surprise Album "Risky Life"</span>
+            <span class="ticker-item">Voltz JT Announces Nationwide Tour</span>
+            <span class="ticker-item">Zim Hip Hop Awards 2026 Nominees Revealed</span>
+            <span class="ticker-item">Ti Gonzi Speaks on Mental Health</span>
+            <span class="ticker-item">New Drill Scene Emerging in Harare</span>
+            <span class="ticker-item">Bling4 Hits 1 Million Streams</span>
+            <span class="ticker-item">Holy Ten Drops Surprise Album "Risky Life"</span>
+            <span class="ticker-item">Voltz JT Announces Nationwide Tour</span>
+            <span class="ticker-item">Zim Hip Hop Awards 2026 Nominees Revealed</span>
+            <span class="ticker-item">Ti Gonzi Speaks on Mental Health</span>
+            <span class="ticker-item">New Drill Scene Emerging in Harare</span>
+            <span class="ticker-item">Bling4 Hits 1 Million Streams</span>
         </div>
     </div>
-</header>
 
-<!-- ==================== HERO SECTION ==================== -->
-<section class="hero" id="home">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-        <div class="hero-badge">#ZimHipHop</div>
-        <h1>The Voice of <span class="highlight">Zimbabwean Hip Hop</span></h1>
-        <p>Breaking news, exclusive interviews, music videos, and the culture that defines Zim urban music. From the streets to the mainstream.</p>
-        <div class="hero-buttons">
-            <a href="#news" class="btn-primary">Latest News <i class="fas fa-arrow-right"></i></a>
-            <a href="#videos" class="btn-secondary">Watch Videos <i class="fas fa-play"></i></a>
-        </div>
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number">50K+</span>
-                <span class="stat-label">Monthly Readers</span>
+    <!-- Header -->
+    <header class="site-header" id="siteHeader">
+        <div class="container">
+            <div class="logo">
+                <a href="#" aria-label="ZimHipHopZone Home">Zim<span>HipHop</span>Zone</a>
             </div>
-            <div class="stat">
-                <span class="stat-number">200+</span>
-                <span class="stat-label">Artists Featured</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">24/7</span>
-                <span class="stat-label">Hip Hop Coverage</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== FEATURED NEWS SECTION ==================== -->
-<section class="featured-news" id="news">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-tag">Latest Updates</div>
-            <h2>Breaking <span class="highlight">News</span></h2>
-            <p>Stay locked in with the hottest stories from the Zimbabwean hip-hop scene</p>
-        </div>
-        
-        <div class="featured-grid">
-            <article class="featured-card main-feature">
-                <div class="card-image">
-                    <img src="https://picsum.photos/id/104/800/500" alt="Featured artist">
-                    <span class="card-category">Exclusive</span>
-                </div>
-                <div class="card-content">
-                    <h3>Holy Ten Drops Surprise Album "Risky Life" – Fans React</h3>
-                    <p>The Zimbabwean rap sensation releases 14-track project featuring collaborations with emerging talents. Early reviews call it his most personal work yet.</p>
-                    <div class="card-meta">
-                        <span><i class="far fa-calendar-alt"></i> April 25, 2026</span>
-                        <span><i class="far fa-comment"></i> 247 Comments</span>
-                        <a href="#" class="read-more">Read Full Story <i class="fas fa-chevron-right"></i></a>
-                    </div>
-                </div>
-            </article>
             
-            <div class="news-sidebar">
-                <article class="news-item">
-                    <div class="news-number">01</div>
-                    <div class="news-details">
-                        <h4><a href="#">Voltz JT Announces "King Is Born" Tour Dates</a></h4>
-                        <span class="news-date">3 hours ago</span>
-                    </div>
-                </article>
-                <article class="news-item">
-                    <div class="news-number">02</div>
-                    <div class="news-details">
-                        <h4><a href="#">Bazooker & Kae Chaps Link Up for "No Love" Visuals</a></h4>
-                        <span class="news-date">6 hours ago</span>
-                    </div>
-                </article>
-                <article class="news-item">
-                    <div class="news-number">03</div>
-                    <div class="news-details">
-                        <h4><a href="#">Zim Hip Hop Awards 2026: Full Nominees List</a></h4>
-                        <span class="news-date">Yesterday</span>
-                    </div>
-                </article>
-                <article class="news-item">
-                    <div class="news-number">04</div>
-                    <div class="news-details">
-                        <h4><a href="#">Ti Gonzi Speaks on Mental Health in New Interview</a></h4>
-                        <span class="news-date">Yesterday</span>
-                    </div>
-                </article>
-                <article class="news-item">
-                    <div class="news-number">05</div>
-                    <div class="news-details">
-                        <h4><a href="#">The Rise of Drill Music in Harare's Underground</a></h4>
-                        <span class="news-date">2 days ago</span>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== VIDEO GALLERY ==================== -->
-<section class="video-gallery" id="videos">
-    <div class="container">
-        <div class="section-header dark">
-            <div class="section-tag">Watch Now</div>
-            <h2>Latest <span class="highlight">Videos</span></h2>
-            <p>Fresh visuals, interviews, and behind-the-scenes content</p>
-        </div>
-        
-        <div class="video-grid">
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://picsum.photos/id/106/400/250" alt="Video thumbnail">
-                    <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <span class="video-duration">3:45</span>
-                </div>
-                <div class="video-info">
-                    <h4>Bling4 - "Pressure" (Official Music Video)</h4>
-                    <p>Directed by Blaqs | 125K views</p>
-                </div>
-            </div>
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://picsum.photos/id/107/400/250" alt="Video thumbnail">
-                    <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <span class="video-duration">5:20</span>
-                </div>
-                <div class="video-info">
-                    <h4>Interview: Anita Jaxson on Female Representation in Hip Hop</h4>
-                    <p>Exclusive ZimHipHopZone Interview</p>
-                </div>
-            </div>
-            <div class="video-card">
-                <div class="video-thumbnail">
-                    <img src="https://picsum.photos/id/108/400/250" alt="Video thumbnail">
-                    <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <span class="video-duration">2:15</span>
-                </div>
-                <div class="video-info">
-                    <h4>Saint Floew - "Mufudzi" (Live Session)</h4>
-                    <p>Acoustic performance | 89K views</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="video-modal" id="videoModal">
-            <div class="video-modal-content">
-                <span class="close-modal">&times;</span>
-                <iframe id="videoIframe" width="100%" height="400" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-        
-        <div class="text-center">
-            <a href="#" class="btn-outline">View All Videos <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== SPOTIFY PLAYLIST SECTION ==================== -->
-<section class="playlist-section" id="playlists">
-    <div class="container">
-        <div class="playlist-wrapper">
-            <div class="playlist-info">
-                <div class="spotify-icon">
-                    <i class="fab fa-spotify"></i>
-                </div>
-                <h2>Zim Hip Hop <span class="highlight">Heavy Rotation</span></h2>
-                <p>Curated playlist featuring the best of Zimbabwean hip-hop. Updated weekly with fresh tracks from established legends and emerging voices.</p>
-                <ul class="playlist-features">
-                    <li><i class="fas fa-check-circle"></i> 50+ hand-picked tracks</li>
-                    <li><i class="fas fa-check-circle"></i> Updated every Friday</li>
-                    <li><i class="fas fa-check-circle"></i> Follow on Spotify for updates</li>
-                </ul>
-                <a href="#" class="btn-spotify">Follow on Spotify <i class="fab fa-spotify"></i></a>
-            </div>
-            <div class="playlist-embed">
-                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator" width="100%" height="380" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== ARTIST SPOTLIGHT ==================== -->
-<section class="artists-section" id="artists">
-    <div class="container">
-        <div class="section-header">
-            <div class="section-tag">Who's Hot</div>
-            <h2>Artist <span class="highlight">Spotlight</span></h2>
-            <p>The voices shaping Zimbabwean urban culture right now</p>
-        </div>
-        
-        <div class="artists-grid">
-            <div class="artist-card">
-                <div class="artist-image">
-                    <img src="https://picsum.photos/id/100/300/300" alt="Holy Ten">
-                </div>
-                <div class="artist-info">
-                    <h4>Holy Ten</h4>
-                    <p>Harare's lyrical mastermind</p>
-                    <div class="artist-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-spotify"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="artist-card">
-                <div class="artist-image">
-                    <img src="https://picsum.photos/id/101/300/300" alt="Voltz JT">
-                </div>
-                <div class="artist-info">
-                    <h4>Voltz JT</h4>
-                    <p>The king of Zim trap</p>
-                    <div class="artist-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-spotify"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="artist-card">
-                <div class="artist-image">
-                    <img src="https://picsum.photos/id/102/300/300" alt="Ti Gonzi">
-                </div>
-                <div class="artist-info">
-                    <h4>Ti Gonzi</h4>
-                    <p>Storyteller of the streets</p>
-                    <div class="artist-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-spotify"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="artist-card">
-                <div class="artist-image">
-                    <img src="https://picsum.photos/id/103/300/300" alt="Bling4">
-                </div>
-                <div class="artist-info">
-                    <h4>Bling4</h4>
-                    <p>Mainstream hitmaker</p>
-                    <div class="artist-social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-spotify"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== TRENDING TOPICS ==================== -->
-<section class="trending">
-    <div class="container">
-        <h3>Trending Topics <i class="fas fa-fire-flame"></i></h3>
-        <div class="trending-tags">
-            <a href="#">#ZimHipHopAwards</a>
-            <a href="#">#NewMusicFriday</a>
-            <a href="#">#ZimDrill</a>
-            <a href="#">#ZimHipHopZoneExclusive</a>
-            <a href="#">#RapBattle</a>
-            <a href="#">#FreshBeats</a>
-            <a href="#">#ZimUrban</a>
-            <a href="#">#Cypher2026</a>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== NEWSLETTER ==================== -->
-<section class="newsletter">
-    <div class="container">
-        <div class="newsletter-content">
-            <h2>Never Miss a Drop</h2>
-            <p>Get the latest news, videos, and exclusive content straight to your inbox</p>
-            <form class="newsletter-form" id="newsletterForm">
-                <input type="email" placeholder="Your email address" required>
-                <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
-            </form>
-            <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ==================== FOOTER ==================== -->
-<footer class="site-footer" id="contact">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-about">
-                <div class="footer-logo">Zim<span>HipHop</span>Zone</div>
-                <p>Zimbabwe's #1 destination for hip-hop news, culture, and music. Amplifying the voice of Zim urban music since 2019.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/ZimHipHopZone" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <h4>Quick Links</h4>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+            
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#news">News</a></li>
                     <li><a href="#videos">Videos</a></li>
                     <li><a href="#playlists">Playlists</a></li>
                     <li><a href="#artists">Artists</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Advertise</a></li>
-                    <li><a href="#">Submit Music</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-            <div class="footer-contact">
-                <h4>Connect</h4>
-                <p><i class="fas fa-envelope"></i> info@zimhiphopzone.co.zw</p>
-                <p><i class="fas fa-phone"></i> +263 78 123 4567</p>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="search-trigger" id="searchTrigger" aria-label="Open search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun" id="themeIcon"></i>
+                </button>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 ZimHipHopZone. All rights reserved. Powered by the culture.</p>
+    </header>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search">
+        <button class="search-close" id="searchClose" aria-label="Close search">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="search-container">
+            <div class="search-input-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search artists, news, videos..." id="searchInput" autocomplete="off">
+            </div>
+            <div class="search-suggestions">
+                <h3>Trending Searches</h3>
+                <div class="search-tags">
+                    <a href="#" class="search-tag">Holy Ten</a>
+                    <a href="#" class="search-tag">Voltz JT</a>
+                    <a href="#" class="search-tag">Zim Drill</a>
+                    <a href="#" class="search-tag">New Albums</a>
+                    <a href="#" class="search-tag">Hip Hop Awards</a>
+                    <a href="#" class="search-tag">Bling4</a>
+                </div>
+            </div>
         </div>
     </div>
-</footer>
 
-<script>
-    // ==================== MOBILE MENU TOGGLE ====================
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mainNav = document.getElementById('mainNav');
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-mesh"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-particles" id="particles"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-fire"></i> #1 Zim Hip Hop Source
+                </div>
+                <h1>The Voice of <span class="gradient-text">Zimbabwean Hip Hop</span></h1>
+                <p>Breaking news, exclusive interviews, music videos, and the culture that defines Zim urban music. From the streets to the mainstream.</p>
+                <div class="hero-buttons">
+                    <a href="#news" class="btn btn-primary" onclick="createRipple(event, this)">
+                        Latest News <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#videos" class="btn btn-secondary" onclick="createRipple(event, this)">
+                        Watch Videos <i class="fas fa-play"></i>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-target="50000">0</span>
+                        <span class="stat-label">Monthly Readers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="200">0</span>
+                        <span class="stat-label">Artists Featured</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="365">0</span>
+                        <span class="stat-label">Days of Coverage</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-wrapper reveal stagger-2">
+                    <img src="https://images.unsplash.com/photo-1493225255756-d9584f8606e9?w=600&h=750&fit=crop" alt="Zimbabwe hip hop artist performing">
+                    <div class="floating-card floating-card-1">
+                        <h4>Trending Now</h4>
+                        <p>Holy Ten <span class="trend"><i class="fas fa-arrow-up"></i> #1</span></p>
+                    </div>
+                    <div class="floating-card floating-card-2">
+                        <h4>New Drop</h4>
+                        <p>"Risky Life" Album</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mainNav.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+    <!-- Main Content -->
+    <main id="main-content">
+
+        <!-- Featured News -->
+        <section class="featured-news" id="news">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-tag"><i class="fas fa-bolt"></i> Latest Updates</div>
+                    <h2>Breaking <span class="gradient-text">News</span></h2>
+                    <p>Stay locked in with the hottest stories from the Zimbabwean hip-hop scene</p>
+                </div>
+                
+                <div class="featured-grid">
+                    <article class="featured-card main-feature reveal stagger-1">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1571266028243-e4733b0f0bb0?w=800&h=600&fit=crop" alt="Holy Ten album cover">
+                            <span class="card-category">Exclusive</span>
+                        </div>
+                        <div class="card-content">
+                            <h3>Holy Ten Drops Surprise Album "Risky Life" – Fans React</h3>
+                            <p>The Zimbabwean rap sensation releases 14-track project featuring collaborations with emerging talents. Early reviews call it his most personal work yet, tackling social issues and personal struggles.</p>
+                            <div class="card-meta">
+                                <span><i class="far fa-calendar-alt"></i> April 25, 2026</span>
+                                <span><i class="far fa-comment"></i> 247 Comments</span>
+                                <span><i class="far fa-clock"></i> 5 min read</span>
+                                <a href="#" class="read-more">Read Story <i class="fas fa-chevron-right"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <div class="news-sidebar">
+                        <a href="#" class="news-item reveal stagger-2">
+                            <div class="news-number">01</div>
+                            <div class="news-details">
+                                <h4>Voltz JT Announces "King Is Born" Tour Dates</h4>
+                                <span class="news-date"><i class="far fa-clock"></i> 3 hours ago</span>
+                            </div>
+                        </a>
+                        <a href="#" class="news-item reveal stagger-3">
+                            <div class="news-number">02</div>
+                            <div class="news-details">
+                                <h4>Bazooker & Kae Chaps Link Up for "No Love" Visuals</h4>
+                                <span class="news-date"><i class="far fa-clock"></i> 6 hours ago</span>
+                            </div>
+                        </a>
+                        <a href="#" class="news-item reveal stagger-4">
+                            <div class="news-number">03</div>
+                            <div class="news-details">
+                                <h4>Zim Hip Hop Awards 2026: Full Nominees List</h4>
+                                <span class="news-date"><i class="far fa-clock"></i> Yesterday</span>
+                            </div>
+                        </a>
+                        <a href="#" class="news-item reveal stagger-5">
+                            <div class="news-number">04</div>
+                            <div class="news-details">
+                                <h4>Ti Gonzi Speaks on Mental Health in New Interview</h4>
+                                <span class="news-date"><i class="far fa-clock"></i> Yesterday</span>
+                            </div>
+                        </a>
+                        <a href="#" class="news-item reveal stagger-5">
+                            <div class="news-number">05</div>
+                            <div class="news-details">
+                                <h4>The Rise of Drill Music in Harare's Underground</h4>
+                                <span class="news-date"><i class="far fa-clock"></i> 2 days ago</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Gallery -->
+        <section class="video-gallery" id="videos">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-tag"><i class="fas fa-play-circle"></i> Watch Now</div>
+                    <h2>Latest <span class="gradient-text">Videos</span></h2>
+                    <p>Fresh visuals, interviews, and behind-the-scenes content</p>
+                </div>
+                
+                <div class="video-grid">
+                    <div class="video-card featured reveal stagger-1">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?w=800&h=500&fit=crop" alt="Music video thumbnail">
+                            <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" aria-label="Play video">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <span class="video-duration">3:45</span>
+                        </div>
+                        <div class="video-info">
+                            <h4>Bling4 - "Pressure" (Official Music Video)</h4>
+                            <p>Directed by Blaqs | 125K views • 2 days ago</p>
+                        </div>
+                    </div>
+                    <div class="video-card reveal stagger-2">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=400&h=250&fit=crop" alt="Interview thumbnail">
+                            <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" aria-label="Play video">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <span class="video-duration">5:20</span>
+                        </div>
+                        <div class="video-info">
+                            <h4>Interview: Anita Jaxson on Female Representation</h4>
+                            <p>Exclusive ZimHipHopZone Interview</p>
+                        </div>
+                    </div>
+                    <div class="video-card reveal stagger-3">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=250&fit=crop" alt="Live session thumbnail">
+                            <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" aria-label="Play video">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <span class="video-duration">2:15</span>
+                        </div>
+                        <div class="video-info">
+                            <h4>Saint Floew - "Mufudzi" (Live Session)</h4>
+                            <p>Acoustic performance | 89K views</p>
+                        </div>
+                    </div>
+                    <div class="video-card reveal stagger-4">
+                        <div class="video-thumbnail">
+                            <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&h=250&fit=crop" alt="Cypher thumbnail">
+                            <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" aria-label="Play video">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <span class="video-duration">8:30</span>
+                        </div>
+                        <div class="video-info">
+                            <h4>2026 Zim Hip Hop Cypher (Part 1)</h4>
+                            <p>8 artists, one beat | 250K views</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center reveal">
+                    <a href="#" class="btn-outline">View All Videos <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Modal -->
+        <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player">
+            <div class="video-modal-content">
+                <button class="close-modal" id="closeModal" aria-label="Close video">
+                    <i class="fas fa-times"></i>
+                </button>
+                <iframe id="videoIframe" width="100%" height="500" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Playlist Section -->
+        <section class="playlist-section" id="playlists">
+            <div class="container">
+                <div class="playlist-wrapper">
+                    <div class="playlist-info reveal">
+                        <div class="spotify-icon">
+                            <i class="fab fa-spotify"></i>
+                        </div>
+                        <h2>Zim Hip Hop <span class="gradient-text">Heavy Rotation</span></h2>
+                        <p>Curated playlist featuring the best of Zimbabwean hip-hop. Updated weekly with fresh tracks from established legends and emerging voices.</p>
+                        <ul class="playlist-features">
+                            <li><i class="fas fa-check-circle"></i> 50+ hand-picked tracks</li>
+                            <li><i class="fas fa-check-circle"></i> Updated every Friday</li>
+                            <li><i class="fas fa-check-circle"></i> Follow on Spotify for updates</li>
+                        </ul>
+                        <a href="#" class="btn-spotify" onclick="createRipple(event, this)">
+                            Follow on Spotify <i class="fab fa-spotify"></i>
+                        </a>
+                    </div>
+                    <div class="playlist-embed reveal stagger-2">
+                        <iframe style="border-radius:16px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator" width="100%" height="400" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify Playlist"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artists Section -->
+        <section class="artists-section" id="artists">
+            <div class="container">
+                <div class="section-header reveal">
+                    <div class="section-tag"><i class="fas fa-microphone-alt"></i> Who's Hot</div>
+                    <h2>Artist <span class="gradient-text">Spotlight</span></h2>
+                    <p>The voices shaping Zimbabwean urban culture right now</p>
+                </div>
+                
+                <div class="artists-grid">
+                    <div class="artist-card reveal stagger-1" onmousemove="handleGlow(event, this)" onmouseleave="resetGlow(this)">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1529068755536-a5ade0dcb4e8?w=400&h=400&fit=crop" alt="Holy Ten">
+                            <div class="artist-glow"></div>
+                        </div>
+                        <div class="artist-info">
+                            <h4>Holy Ten</h4>
+                            <p>Harare's lyrical mastermind</p>
+                            <div class="artist-social">
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artist-card reveal stagger-2" onmousemove="handleGlow(event, this)" onmouseleave="resetGlow(this)">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Voltz JT">
+                            <div class="artist-glow"></div>
+                        </div>
+                        <div class="artist-info">
+                            <h4>Voltz JT</h4>
+                            <p>The king of Zim trap</p>
+                            <div class="artist-social">
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artist-card reveal stagger-3" onmousemove="handleGlow(event, this)" onmouseleave="resetGlow(this)">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop" alt="Ti Gonzi">
+                            <div class="artist-glow"></div>
+                        </div>
+                        <div class="artist-info">
+                            <h4>Ti Gonzi</h4>
+                            <p>Storyteller of the streets</p>
+                            <div class="artist-social">
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="artist-card reveal stagger-4" onmousemove="handleGlow(event, this)" onmouseleave="resetGlow(this)">
+                        <div class="artist-image">
+                            <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=400&h=400&fit=crop" alt="Bling4">
+                            <div class="artist-glow"></div>
+                        </div>
+                        <div class="artist-info">
+                            <h4>Bling4</h4>
+                            <p>Mainstream hitmaker</p>
+                            <div class="artist-social">
+                                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending -->
+        <section class="trending">
+            <div class="container">
+                <div class="trending-header reveal">
+                    <h3><i class="fas fa-fire"></i> Trending Topics</h3>
+                </div>
+                <div class="trending-tags reveal stagger-1">
+                    <a href="#">#ZimHipHopAwards</a>
+                    <a href="#">#NewMusicFriday</a>
+                    <a href="#">#ZimDrill</a>
+                    <a href="#">#ZimHipHopZoneExclusive</a>
+                    <a href="#">#RapBattle</a>
+                    <a href="#">#FreshBeats</a>
+                    <a href="#">#ZimUrban</a>
+                    <a href="#">#Cypher2026</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content reveal">
+                    <h2>Never Miss a Drop</h2>
+                    <p>Get the latest news, videos, and exclusive content straight to your inbox</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your email address" required aria-label="Email address">
+                        <button type="submit" id="submitBtn">
+                            Subscribe <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <p class="newsletter-note">No spam. Unsubscribe anytime. Join 15,000+ subscribers.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">Zim<span>HipHop</span>Zone</div>
+                    <p>Zimbabwe's #1 destination for hip-hop news, culture, and music. Amplifying the voice of Zim urban music since 2019.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#videos">Videos</a></li>
+                        <li><a href="#playlists">Playlists</a></li>
+                        <li><a href="#artists">Artists</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Submit Music</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Connect</h4>
+                    <p><i class="fas fa-envelope"></i> info@zimhiphopzone.co.zw</p>
+                    <p><i class="fas fa-phone"></i> +263 78 123 4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Harare, Zimbabwe</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ZimHipHopZone. All rights reserved. Powered by the culture.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==================== PARTICLES ====================
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
             }
-        });
-    }
-
-    document.querySelectorAll('.main-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            mainNav.classList.remove('active');
-            if (mobileMenuBtn) {
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    });
-
-    // ==================== VIDEO MODAL ====================
-    const videoModal = document.getElementById('videoModal');
-    const videoIframe = document.getElementById('videoIframe');
-    const closeModal = document.querySelector('.close-modal');
-
-    document.querySelectorAll('.play-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const videoUrl = btn.getAttribute('data-video');
-            videoIframe.src = videoUrl;
-            videoModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-    });
-
-    if (closeModal) {
-        closeModal.addEventListener('click', () => {
-            videoModal.style.display = 'none';
-            videoIframe.src = '';
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    window.addEventListener('click', (e) => {
-        if (e.target === videoModal) {
-            videoModal.style.display = 'none';
-            videoIframe.src = '';
-            document.body.style.overflow = 'auto';
         }
-    });
+        createParticles();
 
-    // ==================== SMOOTH SCROLLING ====================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                e.preventDefault();
-                const headerOffset = 80;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        // ==================== SCROLL PROGRESS ====================
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+        });
+
+        // ==================== HEADER SCROLL EFFECT ====================
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
-    });
 
-    // ==================== NEWSLETTER FORM ====================
-    const newsletterForm = document.getElementById('newsletterForm');
-    if (newsletterForm) {
+        // ==================== THEME TOGGLE ====================
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        function updateThemeIcon() {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            updateThemeIcon();
+        });
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            html.setAttribute('data-theme', savedTheme);
+            updateThemeIcon();
+        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+            html.setAttribute('data-theme', 'light');
+            updateThemeIcon();
+        }
+
+        // ==================== MOBILE MENU ====================
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isActive = mainNav.classList.toggle('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isActive);
+            menuIcon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
+        });
+
+        document.querySelectorAll('.main-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                menuIcon.className = 'fas fa-bars';
+            });
+        });
+
+        // ==================== SEARCH OVERLAY ====================
+        const searchTrigger = document.getElementById('searchTrigger');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchClose = document.getElementById('searchClose');
+        const searchInput = document.getElementById('searchInput');
+
+        function openSearch() {
+            searchOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => searchInput.focus(), 100);
+        }
+
+        function closeSearch() {
+            searchOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            searchInput.value = '';
+        }
+
+        searchTrigger.addEventListener('click', openSearch);
+        searchClose.addEventListener('click', closeSearch);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '/' && !searchOverlay.classList.contains('active')) {
+                e.preventDefault();
+                openSearch();
+            }
+            if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
+                closeSearch();
+            }
+        });
+
+        // ==================== VIDEO MODAL ====================
+        const videoModal = document.getElementById('videoModal');
+        const videoIframe = document.getElementById('videoIframe');
+        const closeModal = document.getElementById('closeModal');
+
+        document.querySelectorAll('.play-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const videoUrl = btn.getAttribute('data-video');
+                videoIframe.src = videoUrl + '?autoplay=1';
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeVideoModal() {
+            videoModal.classList.remove('active');
+            videoIframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        closeModal.addEventListener('click', closeVideoModal);
+
+        window.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeVideoModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                closeVideoModal();
+            }
+        });
+
+        // ==================== SMOOTH SCROLLING ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    const headerOffset = 108;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // ==================== NEWSLETTER FORM ====================
+        const newsletterForm = document.getElementById('newsletterForm');
+        const submitBtn = document.getElementById('submitBtn');
+
         newsletterForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const emailInput = newsletterForm.querySelector('input[type="email"]');
             const email = emailInput.value;
+            
             if (email) {
-                alert(`Thanks for subscribing, ${email}! You'll get the latest Zim hip-hop news.`);
-                emailInput.value = '';
-                let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
-                if (!subscribers.includes(email)) {
-                    subscribers.push(email);
-                    localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+                submitBtn.classList.add('loading');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subscribing...';
+                
+                setTimeout(() => {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.classList.add('success');
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
+                    
+                    let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
+                    if (!subscribers.includes(email)) {
+                        subscribers.push(email);
+                        localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+                    }
+                    
+                    emailInput.value = '';
+                    
+                    setTimeout(() => {
+                        submitBtn.classList.remove('success');
+                        submitBtn.innerHTML = 'Subscribe <i class="fas fa-paper-plane"></i>';
+                    }, 3000);
+                }, 1500);
+            }
+        });
+
+        // ==================== SCROLL REVEAL ====================
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
                 }
-            }
-        });
-    }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    // ==================== HEADER SCROLL EFFECT ====================
-    const header = document.querySelector('.site-header');
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 100) {
-            header.style.background = 'rgba(10, 10, 10, 0.98)';
-            header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
-        } else {
-            header.style.background = 'rgba(10, 10, 10, 0.95)';
-            header.style.boxShadow = 'none';
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ==================== COUNTER ANIMATION ====================
+        const counters = document.querySelectorAll('.stat-number');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            entry.target.textContent = Math.floor(current).toLocaleString() + '+';
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            entry.target.textContent = target.toLocaleString() + '+';
+                        }
+                    };
+                    
+                    updateCounter();
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // ==================== RIPPLE EFFECT ====================
+        function createRipple(event, button) {
+            const ripple = document.createElement('span');
+            ripple.className = 'btn-ripple';
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (event.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (event.clientY - rect.top - size / 2) + 'px';
+            button.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
         }
-    });
 
-    // ==================== ANIMATION ON SCROLL ====================
-    const animateOnScroll = () => {
-        document.querySelectorAll('.featured-card, .video-card, .artist-card, .news-item').forEach(el => {
-            const elementTop = el.getBoundingClientRect().top;
-            if (elementTop < window.innerHeight - 150) {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }
-        });
-    };
-    document.querySelectorAll('.featured-card, .video-card, .artist-card, .news-item').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    });
-    window.addEventListener('scroll', animateOnScroll);
-    window.addEventListener('load', animateOnScroll);
+        // ==================== ARTIST CARD GLOW ====================
+        function handleGlow(e, card) {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--mouse-x', x + '%');
+            card.style.setProperty('--mouse-y', y + '%');
+        }
 
-    // ==================== SEARCH ====================
-    document.querySelector('.search-icon')?.addEventListener('click', () => {
-        const query = prompt('Search ZimHipHopZone:');
-        if (query && query.trim()) alert(`Searching for "${query}"... (Full search coming soon!)`);
-    });
+        function resetGlow(card) {
+            card.style.setProperty('--mouse-x', '50%');
+            card.style.setProperty('--mouse-y', '50%');
+        }
 
-    console.log('ZimHipHopZone website loaded successfully! 🎤🔥');
-</script>
+        // ==================== CONSOLE MESSAGE ====================
+        console.log('%c🔥 ZimHipHopZone Loaded', 'color: #ff003c; font-size: 24px; font-weight: bold;');
+        console.log('%cThe Voice of Zimbabwean Hip Hop', 'color: #666; font-size: 14px;');
+    </script>
 </body>
 </html>
