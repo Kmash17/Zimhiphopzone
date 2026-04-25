@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ZimHipHopZone | Zimbabwe Hip Hop News, Videos & Culture</title>
+    <meta name="description" content="ZimHipHopZone – Your #1 source for Zimbabwean hip-hop news, music videos, artist interviews, and urban culture. Stay updated with the hottest Zim rap.">
+    <meta name="keywords" content="Zimbabwe hip hop, Zim rap, ZimHipHopZone, Zimbabwean music, urban culture Zimbabwe">
+    <meta name="author" content="ZimHipHopZone">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== RESET & VARIABLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #e63946;
+            --primary-dark: #c1121f;
+            --secondary: #1d3557;
+            --dark: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --text-muted: #6c757d;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, #ff6b6b 100%);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-dark: 0 10px 30px rgba(0,0,0,0.3);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+
+        /* ==================== HEADER ==================== */
+        .site-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .main-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .main-nav a:hover {
+            color: var(--primary);
+        }
+
+        .search-icon {
+            color: var(--white);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%), url('https://picsum.photos/id/104/1920/1080');
+            background-blend-mode: overlay;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-top: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 14px 32px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--dark);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* ==================== SECTION HEADERS ==================== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header.dark {
+            color: var(--white);
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--primary);
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ==================== FEATURED NEWS ==================== */
+        .featured-news {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+        }
+
+        .featured-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .featured-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-category {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: auto;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            gap: 4px;
+        }
+
+        .news-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .news-item:hover {
+            background: #e8e8e8;
+            transform: translateX(5px);
+        }
+
+        .news-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            opacity: 0.5;
+        }
+
+        .news-details h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .news-details a {
+            text-decoration: none;
+            color: var(--dark);
+        }
+
+        .news-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ==================== VIDEO GALLERY ==================== */
+        .video-gallery {
+            padding: 80px 0;
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .video-card {
+            background: var(--dark-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .video-thumbnail img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0.9;
+        }
+
+        .play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            opacity: 1;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .video-info {
+            padding: 16px;
+        }
+
+        .video-info h4 {
+            margin-bottom: 8px;
+        }
+
+        .video-info p {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        /* Modal */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* ==================== PLAYLIST SECTION ==================== */
+        .playlist-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: var(--white);
+        }
+
+        .playlist-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .spotify-icon {
+            font-size: 3rem;
+            color: #1DB954;
+            margin-bottom: 20px;
+        }
+
+        .playlist-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .playlist-features {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .playlist-features li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .playlist-features i {
+            color: #1DB954;
+        }
+
+        .btn-spotify {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #1DB954;
+            color: var(--white);
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-spotify:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+        }
+
+        /* ==================== ARTISTS SECTION ==================== */
+        .artists-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+
+        .artist-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .artist-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .artist-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .artist-info {
+            padding: 20px;
+        }
+
+        .artist-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .artist-info p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .artist-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .artist-social a {
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .artist-social a:hover {
+            color: var(--primary);
+        }
+
+        /* ==================== TRENDING ==================== */
+        .trending {
+            padding: 40px 0;
+            background: var(--white);
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .trending h3 {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .trending-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .trending-tags a {
+            background: var(--light-gray);
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .trending-tags a:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ==================== NEWSLETTER ==================== */
+        .newsletter {
+            padding: 60px 0;
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .newsletter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-content h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 12px;
+            margin: 30px 0 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background: var(--dark);
+            color: var(--white);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: #000;
+            transform: translateY(-2px);
+        }
+
+        .newsletter-note {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background: var(--dark);
+            color: #aaa;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #aaa;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-links h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-contact p {
+            margin-bottom: 12px;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+        }
+
+        /* ==================== BUTTONS & UTILITIES ==================== */
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 28px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .featured-grid,
+            .playlist-wrapper,
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .main-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .main-nav.active {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                padding: 20px;
+            }
+            
+            .main-nav.active ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 25px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== HEADER / NAVIGATION ==================== -->
+<header class="site-header">
+    <div class="container">
+        <div class="logo">
+            <a href="#">Zim<span>HipHop</span>Zone</a>
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#playlists">Playlists</a></li>
+                <li><a href="#artists">Artists</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="search-icon">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+</header>
+
+<!-- ==================== HERO SECTION ==================== -->
+<section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <div class="hero-badge">#ZimHipHop</div>
+        <h1>The Voice of <span class="highlight">Zimbabwean Hip Hop</span></h1>
+        <p>Breaking news, exclusive interviews, music videos, and the culture that defines Zim urban music. From the streets to the mainstream.</p>
+        <div class="hero-buttons">
+            <a href="#news" class="btn-primary">Latest News <i class="fas fa-arrow-right"></i></a>
+            <a href="#videos" class="btn-secondary">Watch Videos <i class="fas fa-play"></i></a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-number">50K+</span>
+                <span class="stat-label">Monthly Readers</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">200+</span>
+                <span class="stat-label">Artists Featured</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">Hip Hop Coverage</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FEATURED NEWS SECTION ==================== -->
+<section class="featured-news" id="news">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Latest Updates</div>
+            <h2>Breaking <span class="highlight">News</span></h2>
+            <p>Stay locked in with the hottest stories from the Zimbabwean hip-hop scene</p>
+        </div>
+        
+        <div class="featured-grid">
+            <article class="featured-card main-feature">
+                <div class="card-image">
+                    <img src="https://picsum.photos/id/104/800/500" alt="Featured artist">
+                    <span class="card-category">Exclusive</span>
+                </div>
+                <div class="card-content">
+                    <h3>Holy Ten Drops Surprise Album "Risky Life" – Fans React</h3>
+                    <p>The Zimbabwean rap sensation releases 14-track project featuring collaborations with emerging talents. Early reviews call it his most personal work yet.</p>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> April 25, 2026</span>
+                        <span><i class="far fa-comment"></i> 247 Comments</span>
+                        <a href="#" class="read-more">Read Full Story <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </article>
+            
+            <div class="news-sidebar">
+                <article class="news-item">
+                    <div class="news-number">01</div>
+                    <div class="news-details">
+                        <h4><a href="#">Voltz JT Announces "King Is Born" Tour Dates</a></h4>
+                        <span class="news-date">3 hours ago</span>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-number">02</div>
+                    <div class="news-details">
+                        <h4><a href="#">Bazooker & Kae Chaps Link Up for "No Love" Visuals</a></h4>
+                        <span class="news-date">6 hours ago</span>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-number">03</div>
+                    <div class="news-details">
+                        <h4><a href="#">Zim Hip Hop Awards 2026: Full Nominees List</a></h4>
+                        <span class="news-date">Yesterday</span>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-number">04</div>
+                    <div class="news-details">
+                        <h4><a href="#">Ti Gonzi Speaks on Mental Health in New Interview</a></h4>
+                        <span class="news-date">Yesterday</span>
+                    </div>
+                </article>
+                <article class="news-item">
+                    <div class="news-number">05</div>
+                    <div class="news-details">
+                        <h4><a href="#">The Rise of Drill Music in Harare's Underground</a></h4>
+                        <span class="news-date">2 days ago</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== VIDEO GALLERY ==================== -->
+<section class="video-gallery" id="videos">
+    <div class="container">
+        <div class="section-header dark">
+            <div class="section-tag">Watch Now</div>
+            <h2>Latest <span class="highlight">Videos</span></h2>
+            <p>Fresh visuals, interviews, and behind-the-scenes content</p>
+        </div>
+        
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://picsum.photos/id/106/400/250" alt="Video thumbnail">
+                    <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <span class="video-duration">3:45</span>
+                </div>
+                <div class="video-info">
+                    <h4>Bling4 - "Pressure" (Official Music Video)</h4>
+                    <p>Directed by Blaqs | 125K views</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://picsum.photos/id/107/400/250" alt="Video thumbnail">
+                    <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <span class="video-duration">5:20</span>
+                </div>
+                <div class="video-info">
+                    <h4>Interview: Anita Jaxson on Female Representation in Hip Hop</h4>
+                    <p>Exclusive ZimHipHopZone Interview</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-thumbnail">
+                    <img src="https://picsum.photos/id/108/400/250" alt="Video thumbnail">
+                    <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <span class="video-duration">2:15</span>
+                </div>
+                <div class="video-info">
+                    <h4>Saint Floew - "Mufudzi" (Live Session)</h4>
+                    <p>Acoustic performance | 89K views</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="video-modal" id="videoModal">
+            <div class="video-modal-content">
+                <span class="close-modal">&times;</span>
+                <iframe id="videoIframe" width="100%" height="400" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="#" class="btn-outline">View All Videos <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== SPOTIFY PLAYLIST SECTION ==================== -->
+<section class="playlist-section" id="playlists">
+    <div class="container">
+        <div class="playlist-wrapper">
+            <div class="playlist-info">
+                <div class="spotify-icon">
+                    <i class="fab fa-spotify"></i>
+                </div>
+                <h2>Zim Hip Hop <span class="highlight">Heavy Rotation</span></h2>
+                <p>Curated playlist featuring the best of Zimbabwean hip-hop. Updated weekly with fresh tracks from established legends and emerging voices.</p>
+                <ul class="playlist-features">
+                    <li><i class="fas fa-check-circle"></i> 50+ hand-picked tracks</li>
+                    <li><i class="fas fa-check-circle"></i> Updated every Friday</li>
+                    <li><i class="fas fa-check-circle"></i> Follow on Spotify for updates</li>
+                </ul>
+                <a href="#" class="btn-spotify">Follow on Spotify <i class="fab fa-spotify"></i></a>
+            </div>
+            <div class="playlist-embed">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator" width="100%" height="380" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== ARTIST SPOTLIGHT ==================== -->
+<section class="artists-section" id="artists">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Who's Hot</div>
+            <h2>Artist <span class="highlight">Spotlight</span></h2>
+            <p>The voices shaping Zimbabwean urban culture right now</p>
+        </div>
+        
+        <div class="artists-grid">
+            <div class="artist-card">
+                <div class="artist-image">
+                    <img src="https://picsum.photos/id/100/300/300" alt="Holy Ten">
+                </div>
+                <div class="artist-info">
+                    <h4>Holy Ten</h4>
+                    <p>Harare's lyrical mastermind</p>
+                    <div class="artist-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="artist-card">
+                <div class="artist-image">
+                    <img src="https://picsum.photos/id/101/300/300" alt="Voltz JT">
+                </div>
+                <div class="artist-info">
+                    <h4>Voltz JT</h4>
+                    <p>The king of Zim trap</p>
+                    <div class="artist-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="artist-card">
+                <div class="artist-image">
+                    <img src="https://picsum.photos/id/102/300/300" alt="Ti Gonzi">
+                </div>
+                <div class="artist-info">
+                    <h4>Ti Gonzi</h4>
+                    <p>Storyteller of the streets</p>
+                    <div class="artist-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="artist-card">
+                <div class="artist-image">
+                    <img src="https://picsum.photos/id/103/300/300" alt="Bling4">
+                </div>
+                <div class="artist-info">
+                    <h4>Bling4</h4>
+                    <p>Mainstream hitmaker</p>
+                    <div class="artist-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-spotify"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== TRENDING TOPICS ==================== -->
+<section class="trending">
+    <div class="container">
+        <h3>Trending Topics <i class="fas fa-fire-flame"></i></h3>
+        <div class="trending-tags">
+            <a href="#">#ZimHipHopAwards</a>
+            <a href="#">#NewMusicFriday</a>
+            <a href="#">#ZimDrill</a>
+            <a href="#">#ZimHipHopZoneExclusive</a>
+            <a href="#">#RapBattle</a>
+            <a href="#">#FreshBeats</a>
+            <a href="#">#ZimUrban</a>
+            <a href="#">#Cypher2026</a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== NEWSLETTER ==================== -->
+<section class="newsletter">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>Never Miss a Drop</h2>
+            <p>Get the latest news, videos, and exclusive content straight to your inbox</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+            </form>
+            <p class="newsletter-note">No spam. Unsubscribe anytime.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer" id="contact">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="footer-logo">Zim<span>HipHop</span>Zone</div>
+                <p>Zimbabwe's #1 destination for hip-hop news, culture, and music. Amplifying the voice of Zim urban music since 2019.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/ZimHipHopZone" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#videos">Videos</a></li>
+                    <li><a href="#playlists">Playlists</a></li>
+                    <li><a href="#artists">Artists</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Advertise</a></li>
+                    <li><a href="#">Submit Music</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Connect</h4>
+                <p><i class="fas fa-envelope"></i> info@zimhiphopzone.co.zw</p>
+                <p><i class="fas fa-phone"></i> +263 78 123 4567</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ZimHipHopZone. All rights reserved. Powered by the culture.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ==================== MOBILE MENU TOGGLE ====================
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mainNav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+
+    document.querySelectorAll('.main-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+            if (mobileMenuBtn) {
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // ==================== VIDEO MODAL ====================
+    const videoModal = document.getElementById('videoModal');
+    const videoIframe = document.getElementById('videoIframe');
+    const closeModal = document.querySelector('.close-modal');
+
+    document.querySelectorAll('.play-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const videoUrl = btn.getAttribute('data-video');
+            videoIframe.src = videoUrl;
+            videoModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            videoModal.style.display = 'none';
+            videoIframe.src = '';
+            document.body.style.overflow = 'auto';
+        });
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === videoModal) {
+            videoModal.style.display = 'none';
+            videoIframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // ==================== SMOOTH SCROLLING ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // ==================== NEWSLETTER FORM ====================
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = newsletterForm.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            if (email) {
+                alert(`Thanks for subscribing, ${email}! You'll get the latest Zim hip-hop news.`);
+                emailInput.value = '';
+                let subscribers = JSON.parse(localStorage.getItem('newsletterSubscribers') || '[]');
+                if (!subscribers.includes(email)) {
+                    subscribers.push(email);
+                    localStorage.setItem('newsletterSubscribers', JSON.stringify(subscribers));
+                }
+            }
+        });
+    }
+
+    // ==================== HEADER SCROLL EFFECT ====================
+    const header = document.querySelector('.site-header');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 100) {
+            header.style.background = 'rgba(10, 10, 10, 0.98)';
+            header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
+        } else {
+            header.style.background = 'rgba(10, 10, 10, 0.95)';
+            header.style.boxShadow = 'none';
+        }
+    });
+
+    // ==================== ANIMATION ON SCROLL ====================
+    const animateOnScroll = () => {
+        document.querySelectorAll('.featured-card, .video-card, .artist-card, .news-item').forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < window.innerHeight - 150) {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+    };
+    document.querySelectorAll('.featured-card, .video-card, .artist-card, .news-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+
+    // ==================== SEARCH ====================
+    document.querySelector('.search-icon')?.addEventListener('click', () => {
+        const query = prompt('Search ZimHipHopZone:');
+        if (query && query.trim()) alert(`Searching for "${query}"... (Full search coming soon!)`);
+    });
+
+    console.log('ZimHipHopZone website loaded successfully! 🎤🔥');
+</script>
+</body>
+</html>
